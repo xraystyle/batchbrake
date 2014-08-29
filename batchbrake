@@ -3,6 +3,10 @@
 # Notes:
 
 
+@temp_dir = '~/.tmp'
+@itunes_dir = '~/Music/iTunes/iTunes\ Music/Automatically\ Add\ to\ iTunes/'
+
+
 
 def choose_preset
 
@@ -55,12 +59,9 @@ def handbrake_it(filename)
 
 	sleep 3
 
-	itunes_dir = '~/Music/iTunes/iTunes\ Music/Automatically\ Add\ to\ iTunes/'
-
 	# brake that shit.
-	# puts "handbrake -i #{filename} -o #{itunes_dir}#{File.basename(filename)}.m4v' --preset=\"#{@selected_preset}\""
-	`handbrake -i \"#{filename}\" -o #{itunes_dir}#{File.basename(filename)}.m4v --preset=\"#{@selected_preset}\"`
-
+	# puts "handbrake -i #{filename} -o #{@itunes_dir}#{File.basename(filename)}.m4v' --preset=\"#{@selected_preset}\""
+	`handbrake -i \"#{filename}\" -o #{@temp_dir}#{File.basename(filename)}.m4v --preset=\"#{@selected_preset}\"`
 
 end
 
@@ -69,6 +70,8 @@ end
 # Figure out if ARGV[0] is a file or a directory.
 # Set up the handbrake job accordingly. 
 def set_up_job
+
+	`mkdir ~/.tmp`
 
 	puts "Begining Handbrake job..."
 	sleep 2
@@ -86,11 +89,11 @@ def set_up_job
 
 			handbrake_it(File.expand_path(ARGV[0] + "/" + file))
 
-			# itunes_dir = '~/Music/iTunes/iTunes\ Music/Automatically\ Add\ to\ iTunes/'
+			# @itunes_dir = '~/Music/iTunes/iTunes\ Music/Automatically\ Add\ to\ iTunes/'
 
 			# # brake that shit.
-			# puts "handbrake -i #{File.expand_path(ARGV[0] + "/" + file)} -o #{itunes_dir}#{file}.m4v' --preset=\"#{@selected_preset}\""
-			# # `handbrake -i #{File.expand_path(ARGV[0] + "/" + file)} -o #{itunes_dir}#{file}.m4v --preset=\"#{@selected_preset}\"`
+			# puts "handbrake -i #{File.expand_path(ARGV[0] + "/" + file)} -o #{@itunes_dir}#{file}.m4v' --preset=\"#{@selected_preset}\""
+			# # `handbrake -i #{File.expand_path(ARGV[0] + "/" + file)} -o #{@itunes_dir}#{file}.m4v --preset=\"#{@selected_preset}\"`
 
 		end
 
@@ -99,7 +102,9 @@ def set_up_job
 		handbrake_it(ARGV[0])
 
 	end
-
+	
+	`mv ~/.tmp/* #{@itunes_dir}/`
+	`rm -rf ~/.tmp`
 	
 end
 

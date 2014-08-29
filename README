@@ -2,6 +2,6 @@ Batchbrake
 
 Batchbrake is a script that provides a bit of a cleaner frontend to the Handbrake video transcoder CLI. The CLI is somewhat complex, so I wanted a way to easily take either a video file or a folder full of them, Handbrake them to a Mac-friendly format, then add them to iTunes.
 
-This script takes either a video file or a folder as a command line argument, prompts you to choose a preset to use when converting, then processes the given video or videos. The transcoded files are then added to the 'Automatically Add To iTunes' folder in the iTunes library so they are, well, automatically added to iTunes the next time the app is launched. They can then be copied out to a mobile device, played back via Apple TV, whatever else.
+This script takes either a video file or a folder as a command line argument, prompts you to choose a preset to use when converting, then processes the given video or videos. The transcoded files are then added to the 'Automatically Add To iTunes' folder in the iTunes library so they are, well, automatically added to iTunes when processing is completed. They can then be copied out to a mobile device, played back via Apple TV, whatever else.
 
 This script is very useful for transcoding entire seasons of TV shows that have been downloaded in common formats that don't play well with other Apple devices, such as MKV.
