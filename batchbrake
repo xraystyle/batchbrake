@@ -3,7 +3,7 @@
 # Notes:
 
 
-@temp_dir = '~/.tmp'
+@temp_dir = '~/.tmp/'
 @itunes_dir = '~/Music/iTunes/iTunes\ Music/Automatically\ Add\ to\ iTunes/'
 
 
@@ -63,6 +63,8 @@ def handbrake_it(filename)
 	# puts "handbrake -i #{filename} -o #{@itunes_dir}#{File.basename(filename)}.m4v' --preset=\"#{@selected_preset}\""
 	`handbrake -i \"#{filename}\" -o #{@temp_dir}#{File.basename(filename)}.m4v --preset=\"#{@selected_preset}\"`
 
+	`mv #{@temp_dir}#{File.basename(filename)}.m4v #{@itunes_dir}/`
+
 end
 
 
@@ -103,7 +105,6 @@ def set_up_job
 
 	end
 	
-	`mv ~/.tmp/* #{@itunes_dir}/`
 	`rm -rf ~/.tmp`
 	
 end
